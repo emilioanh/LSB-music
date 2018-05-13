@@ -1,6 +1,6 @@
 from apiclient.discovery import build
 from httplib2 import Http
-from drive_auth import GAuth
+from APIs.drive_auth import GAuth
 from oauth2client import file
 from watermark.models import Song
 
@@ -37,8 +37,12 @@ def save_files_to_sqlite():
         print('Files:')
         for item in items:
             print(f"{item['name']} ({item['id']})")
-            name = item['name'].split(' - ')[0]
-            author = item['name'].split(' - ')[1].split('.')[0]
+            if "-" in item['name']:
+                name = item['name'].split(' - ')[0]
+                author = item['name'].split(' - ')[1].split('.')[0]
+            else:
+                name = item['name'].split('.')[0]
+                author = ""
             id = item['id']
             song = Song(id=id, name=name, author=author)
             song.save()

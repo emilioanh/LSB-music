@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if songs.count > 0 %}
+<table class="ui selectable inverted celled striped table">
+    <thead>
+    <tr>
+        <th colspan="2">Music in your soul</th>
+        <th>Download</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for song in songs %}
+    <tr id="{{ song.id }}">
+        <!-- <td class="collapsing">
+            <i class="dollar icon"></i> {{ song.price }}
+        </td> -->
+        <td>
+            {% if song.author == "" %}
+                <i class="music icon"></i>{{ song.name }}
+            {% else %}
+                <i class="music icon"></i>{{ song.name }} -  {{ song.author }}
+            {% endif %}
+        </td>
+        <td class="collapsing">
+            <audio controls onplay="playEvent(this)">
+                <source src="https://docs.google.com/uc?export=open&id={{ song.id }}" type="audio/mp3">
+            </audio>
+        </td>
+        <td class="collapsing center aligned">
+            <i class="cloud download icon" style="cursor: pointer;"></i>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}
