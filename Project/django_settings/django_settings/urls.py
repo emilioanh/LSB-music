@@ -20,6 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('watermark.urls')),
     path('admin/', admin.site.urls),
-    # url(r'^login/$', auth_views.login, name='login'),
-    # url(r'^logout/$', auth_views.logout, name='logout'),
+    path(r'login/', auth_views.login, {'template_name': 'auths/login.html'}, name='login'),
+    path(r'logout/', auth_views.logout, {'next_page': 'homepage'}, name='logout'),
 ]

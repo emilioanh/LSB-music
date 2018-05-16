@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="ui container segment center aligned" style="height: 83%;">
+    <h2>Sign up</h2>
+    <div class="ui container" style="width: fit-content;">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <p style="text-align: left">
+                    {{ field.label_tag }}<br>
+                    <div class="ui input" style="width: 100%;">
+                        {{ field }}
+                    </div>
+                    {% if field.help_text %}
+                        <br>
+                        <small style="color: rgb(172, 170, 170); text-align: left;">{{ field.help_text | safe}}</small>
+                    {% endif %}
+        
+                    {% for error in field.errors %}
+                        <p style="color: rgb(194, 7, 7)">{{ error }}</p>
+                    {% endfor %}
+                </p>
+            {% endfor %}
+            <button id="signup" class="ui button" type="submit">Sign up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

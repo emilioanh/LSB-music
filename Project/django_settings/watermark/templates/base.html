@@ -14,18 +14,38 @@
       crossorigin="anonymous"></script>
     <script src="{% static 'dist/semantic.min.js' %}"></script>
     <script src="{% static 'base.js' %}"></script>
-    <title>Play Your Music</title>
+    <title>{% block title %}Play your music{% endblock %}</title>
 
 </head>
 <body>
     {% block message %}
-
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        {% if message.tags == "success" %}
+        <div class="ui basic modal" id="login_popup">
+            <div class="ui icon header">
+                <i class="bullhorn icon"></i>
+                Boooooooom you're in
+            </div>
+            <div style="text-align: center">
+                <p>Congratualtions! You have successfully logged in with {{ user.username }} account. Now hit the music and have a good time.</p>
+            </div>
+        </div>
+        {% endif %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% endblock %}
 
     {% block navigator %}
-    <div class="ui secondary  menu">
-        <a class="active item" href="#">
+    <div class="ui secondary menu">
+        <a class="active item" href="{% url 'homepage' %}">
             Home
+        </a>
+        <a class="item" href="/admin">
+            Administrator Page
         </a>
         <div class="right menu">
             <div class="item">
@@ -34,14 +54,26 @@
                     <i class="search link icon"></i>
                 </div>
             </div>
-            <a class="ui item">
-                Logout
-            </a>
+            {% if not user.is_authenticated %}
+                <a class="ui item" href="{% url 'login' %}">
+                    Login
+                </a>
+                <a class="ui item" href="{% url 'signup' %}">
+                    Sign Up
+                </a>
+            {% else %}
+                <a class="ui item" href="#">
+                    Hello, {{ user.username }}
+                </a>
+                <a class="ui item" href="{% url 'logout' %}">
+                    Logout
+                </a>
+            {% endif %}
         </div>
     </div>
     {% endblock %}
 
-    <div class="ui container">
+    <div style="height: 100%;">
         {% block content %}
         {% endblock %}
     </div>

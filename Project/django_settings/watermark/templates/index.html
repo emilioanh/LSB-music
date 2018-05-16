@@ -24,9 +24,14 @@
             {% endif %}
         </td>
         <td class="collapsing">
-            <audio controls onplay="playEvent(this)">
-                <source src="https://docs.google.com/uc?export=open&id={{ song.id }}" type="audio/mp3">
-            </audio>
+            <div style="background-color: #fafafa;
+                        padding: 3px;
+                        display: inline-block;
+                        border-radius: 10px;">
+                <audio controls onplay="playEvent(this)">
+                    <source src="https://docs.google.com/uc?export=open&id={{ song.id }}" type="audio/mp3">
+                </audio>
+            </div>
         </td>
         <td class="collapsing center aligned">
             <i class="cloud download icon" style="cursor: pointer;"></i>

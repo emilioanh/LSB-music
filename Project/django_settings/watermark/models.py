@@ -1,7 +1,11 @@
+import json
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.signals import user_logged_in, user_logged_out
+from django.dispatch import receiver
+from django.contrib import messages
 
 # Create your models here.
 class Song(models.Model):
@@ -40,3 +44,12 @@ class Profile(models.Model):
         if created:
             Profile.objects.create(user=instance)
         instance.profile.save()
+
+@receiver(user_logged_in, sender=User)
+def on_login(user, request, **kwargs):
+    request.session['userid'] = user.id
+    messages.success(request, 'Booooooom, you are in')
+
+@receiver(user_logged_out, sender=User)
+def on_logout(request, user, **kwargs):
+    messages.warning(request, 'Let the music in your soul til we meet again!')
