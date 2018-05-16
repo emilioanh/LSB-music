@@ -2,10 +2,11 @@ from apiclient.discovery import build
 from httplib2 import Http
 from APIs.drive_auth import GAuth
 from oauth2client import file
+from googleapiclient.http import MediaFileUpload
 from watermark.models import Song
 
 # Setup the Drive v3 API
-SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
+SCOPES = 'https://www.googleapis.com/auth/drive'
 store = file.Storage('credentials.json')
 gg_auth = GAuth(SCOPES, store)
 creds = gg_auth.getCredentials()
@@ -47,3 +48,17 @@ def save_files_to_sqlite():
             song = Song(id=id, name=name, author=author)
             song.save()
             print('Saved songs to database')
+
+def uploadToFolder(name, path, mimetype, folderId=music_folder_id):
+    file_metadata = {
+        'name': name,
+        'parents': [f'{music_folder_id}']
+    }
+    media = MediaFileUpload(path,
+                            mimetype=mimetype)
+    file = service.files().create(body=file_metadata,
+                                        media_body=media,
+                                        fields='id').execute()
+    fileId = file.get('id')
+    print(f'File ID: {fileId}')
+    return fileId

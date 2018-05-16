@@ -21,5 +21,5 @@ urlpatterns = [
     path('', include('watermark.urls')),
     path('admin/', admin.site.urls),
     path(r'login/', auth_views.login, {'template_name': 'auths/login.html'}, name='login'),
-    path(r'logout/', auth_views.logout, {'next_page': 'homepage'}, name='logout'),
+    path(r'logout/', auth_views.logout, {'next_page': 'login'}, name='logout'),
 ]

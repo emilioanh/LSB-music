@@ -2,26 +2,36 @@
 
 {% block content %}
 
-{% if songs.count > 0 %}
+{% if songs.count > 0 %}  {# also can write as songs|length #}
 <table class="ui selectable inverted celled striped table">
     <thead>
     <tr>
-        <th colspan="2">Music in your soul</th>
-        <th>Download</th>
+        <th colspan="2">
+            Music in your soul
+            {% if user.is_authenticated and user.is_superuser %}
+            <div class="ui right floated violet labeled icon button"
+                        onclick="window.location.replace('/upload');">
+                <i class="cloud upload icon"></i> Upload
+            </div>
+            {% endif %}
+        </th>
+        {% if user.is_authenticated and not user.is_superuser %}
+        <th class="center aligned">
+            Buy now
+        </th>
+        {% endif %}
     </tr>
     </thead>
     <tbody>
     {% for song in songs %}
     <tr id="{{ song.id }}">
-        <!-- <td class="collapsing">
-            <i class="dollar icon"></i> {{ song.price }}
-        </td> -->
+        {% if song.pric is not None %}
+        <td class="collapsing">
+            <i class="pound sign icon"></i> {{ song.price }}
+        </td>
+        {% endif %}
         <td>
-            {% if song.author == "" %}
-                <i class="music icon"></i>{{ song.name }}
-            {% else %}
-                <i class="music icon"></i>{{ song.name }} -  {{ song.author }}
-            {% endif %}
+            <i class="music icon"></i>{{ song.name }} -  {{ song.author }}
         </td>
         <td class="collapsing">
             <div style="background-color: #fafafa;
@@ -33,9 +43,16 @@
                 </audio>
             </div>
         </td>
-        <td class="collapsing center aligned">
-            <i class="cloud download icon" style="cursor: pointer;"></i>
+        {% if user.is_authenticated and not user.is_superuser %}
+        <td class="center aligned collapsing">
+            <div class="ui medium vertical animated button" tabindex="0">
+                <div class="hidden content">Shop</div>
+                <div class="visible content">
+                    <i class="shop icon"></i>
+                </div>
+            </div>
         </td>
+        {% endif %}
     </tr>
     {% endfor %}
     </tbody>
