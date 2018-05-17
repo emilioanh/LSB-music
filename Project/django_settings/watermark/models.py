@@ -15,8 +15,8 @@ class Song(models.Model):
     srcLink = models.CharField(null=True, blank=True, max_length=250)
     genre = models.CharField(null=True, blank=True, max_length=100)
     fileType = models.CharField(blank=True, max_length=10)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     price = models.FloatField(default=0)
+    ownuser = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         db_table = 'watermark_song'

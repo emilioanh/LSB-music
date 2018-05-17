@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="ui container segment center aligned" style="height: 70%;">
+<div class="ui container segment center aligned" style="height: 65%;">
     <div class="ui container" style="width: fit-content;">
         <form class="ui form" action="#" method="post" enctype="multipart/form-data" > 
             {# enctype attr is set like this for the request.FILES not empty#}
@@ -24,12 +24,10 @@
                             <i class="ui upload icon"></i> 
                             Upload file
                         </label>
-                    {% else %}
-                        {{ field }}
                     {% endif %}
                 </div>
             {% endfor %}
-            <button class="ui button" type="submit">Upload</button>
+            <button class="ui button" type="submit">Check</button>
         </form>
     </div>
 </div>
@@ -41,17 +39,5 @@
             $('#upload').addClass('black');
         }
     });
-    function autoFillInfo(){
-            var songName = document.getElementById('id_fileUpload').files[0].name;
-            var author = "";
-            if (songName.split(' - ').length > 0 ){
-                author= songName.split(' - ')[1].split('.',1)[0];
-                songName= songName.split(' - ')[0];
-            }
-            var nameInputField = document.getElementById('id_name');
-            var authorInputField = document.getElementById('id_author');
-            nameInputField.value = songName;
-            authorInputField.value = author;
-    }
 </script>
 {% endblock %}

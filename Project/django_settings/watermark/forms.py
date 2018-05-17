@@ -18,3 +18,6 @@ class UploadForm(forms.ModelForm):
     class Meta:
         model = Song
         fields = ['fileUpload', 'name', 'author', 'genre', 'price']
+
+class DecodeForm(forms.Form):
+    fileUpload = forms.FileField(label='Song File')

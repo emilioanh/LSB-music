@@ -1,5 +1,5 @@
 $(function(){
-    $('audio').on('play', function() {
+    $('audio').on('play', ()=>{
         $("audio").not(this).each(function(index, audio) {
             audio.pause();
             var id = audio.currentSrc.split("=").pop();
@@ -14,7 +14,7 @@ $(function(){
     }else if(signup.length){
         signup.addClass('disabled');
     }
-    $('form div input').blur(function(){
+    $('form div input').blur(()=>{
         if(this.value==""){
             if(login.length){
                 $('#login').removeClass('disabled');
@@ -33,10 +33,17 @@ $(function(){
     });
     var message = $('.messages');
     if(message){
-        setTimeout(function(){
-            message.hide();
-            $('.ui.basic.modal').modal('hide');
-        }, 3000);
+        var decrBool = message.find('#watermark');
+        if(decrBool.length>0){
+            setTimeout(()=>{
+                message.hide();
+            }, 3000);
+        }else{
+            setTimeout(()=>{
+                message.hide();
+                $('.ui.basic.modal').modal('hide');
+            }, 3000);
+        }
     }
     $('.ui.basic.modal').modal('show');
 });
