@@ -14,6 +14,23 @@ $(function(){
         }
     }
     $('.ui.basic.modal').modal('show');
+    switch (window.location.pathname){
+        case "/":
+            $("#home").addClass("active");
+            break;                    
+        case "/decode":
+            $("#check").addClass("active");
+            break;
+        case "/login/":
+            $("#login_nav").addClass("active");
+            break;
+        case "/signup":
+            $("#signup_nav").addClass("active");
+            break;
+        case "/mysong":
+            $("#mysong").addClass("active");
+            break;
+    }
 });
 
 function playEvent(element){

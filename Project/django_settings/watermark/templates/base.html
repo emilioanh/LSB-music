@@ -51,56 +51,58 @@
     {% endblock %}
 
     {% block navigator %}
-    <div class="ui secondary menu">
-        <a class="active item" href="{% url 'homepage' %}">
-            <i class="home icon"></i>
-            Home
-        </a>
-        <a class="item" href="/admin">
-            <i class="address card icon"></i>
-            Administrator Page
-        </a>
-        <a class="item" href="{% url 'decode' %}">
-            <i class="magic icon"></i>
-            Check watermark
-        </a>
-        {% if user.is_authenticated and not user.is_superuser %}
-        <a class="item" href="{% url 'mysong' %}">
-            <i class="music icon"></i>
-            My songs
-        </a>
-        {% endif %}
-        <div class="right menu">
-            <div class="item">
-                <div class="ui icon input">
-                    <input type="text" placeholder="Search...">
-                    <i class="search link icon"></i>
+    <div class="ui inverted segment">
+        <div class="ui inverted secondary pointing menu">
+            <a class="item" id="home" href="{% url 'homepage' %}">
+                <i class="home icon"></i>
+                Home
+            </a>
+            <a class="item" id="admin" href="/admin">
+                <i class="address card icon"></i>
+                Administrator Page
+            </a>
+            <a class="item" id="check" href="{% url 'decode' %}">
+                <i class="magic icon"></i>
+                Check watermark
+            </a>
+            {% if user.is_authenticated and not user.is_superuser %}
+            <a class="item" id="mysong" href="{% url 'mysong' %}">
+                <i class="music icon"></i>
+                My songs
+            </a>
+            {% endif %}
+            <div class="right menu">
+                <div class="item">
+                    <div class="ui icon input">
+                        <input type="text" placeholder="Search...">
+                        <i class="search link icon"></i>
+                    </div>
                 </div>
-            </div>
-            {% if not user.is_authenticated %}
-                <a class="ui item" href="{% url 'login' %}">
-                    <i class="sign in alternate icon"></i>
-                    Login
-                </a>
-                <a class="ui item" href="{% url 'signup' %}">
-                    <i class="user plus icon"></i>
-                    Sign Up
-                </a>
-            {% else %}
-                {% if not user.is_superuser %}
-                    <a class="ui item" href="{% url 'mysong' %}">
-                        Hello, {{ user.username }}
+                {% if not user.is_authenticated %}
+                    <a class="ui item" id="login_nav" href="{% url 'login' %}">
+                        <i class="sign in alternate icon"></i>
+                        Login
+                    </a>
+                    <a class="ui item" id="signup_nav" href="{% url 'signup' %}">
+                        <i class="user plus icon"></i>
+                        Sign Up
                     </a>
                 {% else %}
-                    <a class="ui item" href="#">
-                        Hello, {{ user.username }}
+                    {% if not user.is_superuser %}
+                        <a class="ui item" id="user_nav" href="{% url 'mysong' %}">
+                            Hello, {{ user.username }}
+                        </a>
+                    {% else %}
+                        <a class="ui item" id="user_nav" href="#">
+                            Hello, {{ user.username }}
+                        </a>
+                    {% endif %}
+                    <a class="ui item" id="logout_nav" href="{% url 'logout' %}">
+                        <i class="sign out alternate icon"></i>
+                        Logout
                     </a>
                 {% endif %}
-                <a class="ui item" href="{% url 'logout' %}">
-                    <i class="sign out alternate icon"></i>
-                    Logout
-                </a>
-            {% endif %}
+            </div>
         </div>
     </div>
     {% endblock %}
