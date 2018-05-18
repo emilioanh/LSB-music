@@ -8,13 +8,13 @@ from mimetypes import MimeTypes
 import os, io
 
 # Setup the Drive v3 API
-SCOPES = 'https://www.googleapis.com/auth/drive'
+SCOPES = 'https://www.googleapis.com/auth/drive' #allow full access
 store = file.Storage('credentials.json')
 gg_auth = GAuth(SCOPES, store)
 creds = gg_auth.getCredentials()
 drive_service = build('drive', 'v3', http=creds.authorize(Http()))
-music_folder_id = '1BuTssjkPviXt0qJClmLZYR5pO33aOiob'
-default_download_folder = os.path.expanduser(os.sep.join(["~", "Downloads"]))
+music_folder_id = '1BuTssjkPviXt0qJClmLZYR5pO33aOiob' #base folder id
+default_download_folder = os.path.expanduser(os.sep.join(["~", "Downloads"])) # C:/.../Downloads
 
 # Call the Drive v3 API
 # results = drive_service.files().list(

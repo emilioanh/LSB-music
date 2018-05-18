@@ -4,8 +4,8 @@ installation steps:
     pip install virtualenv  
     virtualenv -p "C:\Program Files (x86)\Python36-32\python.exe" env (inside the project folder)  
     env\Scripts\activate.bat (to activate virtualenv)  
-    python manage.py runserver (in djangosettings)  
     install google clientapi: pip install --upgrade google-api-python-client (note install when env is activated)
+    python manage.py runserver (in djangosettings)  
 +Mac:  
     pip install virtualenv  
     virtualenv -p /Library/Frameworks/Python.framework/Versions/3.6/bin/python3 envmac  
@@ -17,3 +17,5 @@ run steps:
     if first time with DB then run "py manage.py makemigrations" follow with "py manage.py migrate"  
     if change DB (suggest that delete sqlite and migration in migration folder note: do not delete __init__.py)  
     then just run makemigrations and migrate again  
+    run "py manage.py createsuperuser" to create init admin user  
+    ... manage.py runserver  

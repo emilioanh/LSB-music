@@ -7,6 +7,7 @@
     <thead>
     <tr>
         <th colspan="3">
+            <i class="headphones icon"></i>
             Music in your soul
             {% if user.is_authenticated and user.is_superuser %}
             <div class="ui right floated violet labeled icon button"
@@ -16,7 +17,8 @@
             {% endif %}
         </th>
         {% if user.is_authenticated and not user.is_superuser %}
-        <th class="center aligned">
+        <th class="center aligned collapsing">
+            <i class="shopping cart icon"></i>
             Buy now
         </th>
         {% endif %}
@@ -36,7 +38,7 @@
                         padding: 3px;
                         display: inline-block;
                         border-radius: 10px;">
-                <audio controls onplay="playEvent(this)">
+                <audio controls controlsList="nodownload" onplay="playEvent(this)">
                     <source src="https://docs.google.com/uc?export=open&id={{ song.id }}" type="audio/mp3">
                 </audio>
             </div>
@@ -46,7 +48,7 @@
             <div class="ui medium vertical animated button" tabindex="0" onclick="location.href='{% url 'buy' song.id%}';">
                 <div class="hidden content">Shop</div>
                 <div class="visible content">
-                    <i class="shop icon"></i>
+                    <i class="cart plus icon"></i>
                 </div>
             </div>
         </td>

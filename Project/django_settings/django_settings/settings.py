@@ -95,6 +95,7 @@ AUTH_PASSWORD_VALIDATORS = [
             'min_length': 5,
         }
     },
+    #the following comment for simple password required
     # {
     #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     # },

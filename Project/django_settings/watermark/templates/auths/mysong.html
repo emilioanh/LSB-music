@@ -6,7 +6,8 @@
 <table class="ui selectable inverted celled striped table">
     <thead>
     <tr>
-        <th colspan="3">
+        <th colspan="4">
+            <i class="headphones icon"></i>
             {{user.first_name}} {{user.last_name}}'s Music
         </th>
     </tr>
@@ -25,10 +26,15 @@
                         padding: 3px;
                         display: inline-block;
                         border-radius: 10px;">
-                <audio controls onplay="playEvent(this)">
+                <audio controls controlsList="nodownload" onplay="playEvent(this)">
                     <source src="https://docs.google.com/uc?export=open&id={{ song.id }}" type="audio/mp3">
                 </audio>
             </div>
+        </td>
+        <td class="center aligned collapsing">
+            <a href="https://docs.google.com/uc?export=open&id={{ song.id }}" download>
+                <i class="download icon"></i>
+            </a>
         </td>
     </tr>
     {% endfor %}
