@@ -87,9 +87,15 @@
                     Sign Up
                 </a>
             {% else %}
-                <a class="ui item" href="{% url 'mysong' %}">
-                    Hello, {{ user.username }}
-                </a>
+                {% if not user.is_superuser %}
+                    <a class="ui item" href="{% url 'mysong' %}">
+                        Hello, {{ user.username }}
+                    </a>
+                {% else %}
+                    <a class="ui item" href="#">
+                        Hello, {{ user.username }}
+                    </a>
+                {% endif %}
                 <a class="ui item" href="{% url 'logout' %}">
                     <i class="sign out alternate icon"></i>
                     Logout
